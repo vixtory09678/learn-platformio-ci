@@ -33,11 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: build project
-        run: platformio run
+        run: pio run
 
   lint:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
       - name: check format
-        run: platformio check --fail-on-defect high
+        run: pio check --fail-on-defect high
