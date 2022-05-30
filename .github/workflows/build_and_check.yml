@@ -30,12 +30,14 @@ jobs:
 
   build:
     needs: dependencies
+    runs-on: ubuntu-latest
     steps:
       - name: build project
         run: platformio run
 
   lint:
     needs: dependencies
+    runs-on: ubuntu-latest
     steps:
       - name: check format
         run: platformio check --fail-on-defect high
