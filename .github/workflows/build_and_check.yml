@@ -43,9 +43,15 @@ jobs:
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+      - name: Cache pip
+        uses: actions/cache@v3.0.3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: ls .
       - name: build project
         run: platformio run
 
@@ -62,8 +68,14 @@ jobs:
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+      - name: Cache pip
+        uses: actions/cache@v3.0.3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: ls .
       - name: check format
         run: platformio check --fail-on-defect high
