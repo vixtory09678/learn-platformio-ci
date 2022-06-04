@@ -52,7 +52,9 @@ jobs:
             ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: pip list -v
+      - run: |
+          pip install --upgrade platformio
+          platformio update
       - name: build project
         run: platformio run
       - run: ls /home/runner/.platformio -la
@@ -80,6 +82,8 @@ jobs:
             ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: pip list -v
+      - run: |
+          pip install --upgrade platformio
+          platformio update
       - name: check format
         run: platformio check --fail-on-defect high
