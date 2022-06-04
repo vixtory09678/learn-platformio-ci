@@ -12,7 +12,7 @@ float Divide(int x, int y) {
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println(divide(10, 2));
+  Serial.println(Divide(10, 2));
 }
 
 void loop() {
