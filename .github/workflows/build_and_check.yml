@@ -32,7 +32,7 @@ jobs:
       - name: Cache platformio
         uses: actions/cache@v3
         with:
-          path: ~/.local/lib/python3.8/site-packages
+          path: ~/.local/lib/python3.8/site-packages/[!platformio]*
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
 
   build:
@@ -55,6 +55,7 @@ jobs:
             ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
+          pip install -U platformio
           platformio update
       - name: build project
         run: platformio run
@@ -79,6 +80,7 @@ jobs:
             ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
+          pip install -U platformio
           platformio update
       - name: check format
         run: platformio check --fail-on-defect high
