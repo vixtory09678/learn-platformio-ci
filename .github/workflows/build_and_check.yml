@@ -21,6 +21,8 @@ jobs:
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-pio-${{ hashFiles('**/lockfiles') }}
+          restore-keys: |
+            ${{ runner.os }}-pio-
       - name: Set up Python
         uses: actions/setup-python@v2
       - name: Install PlatformIO
