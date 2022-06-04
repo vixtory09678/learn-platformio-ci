@@ -41,7 +41,7 @@ jobs:
         with:
           path: ~/.platformio
           restore-keys: |
-            ${{ runner.os }}-platformio-
+            ${{ runner.os }}-platformio-*
       - name: build project
         run: platformio run
 
@@ -54,6 +54,6 @@ jobs:
         with:
           path: ~/.platformio
           restore-keys: |
-            ${{ runner.os }}-platformio-
+            ${{ runner.os }}-platformio-*
       - name: check format
         run: platformio check --fail-on-defect high
