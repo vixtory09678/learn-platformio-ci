@@ -32,6 +32,10 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
+      - name: Cache PlatformIO
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
       - name: build project
         run: pio run
 
@@ -39,5 +43,9 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
+      - name: Cache PlatformIO
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
       - name: check format
         run: pio check --fail-on-defect high
