@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-float divide(int x, int y) {
+float Divide(int x, int y) {
   if (y == 0.0) {
     return 0.0;
   }
