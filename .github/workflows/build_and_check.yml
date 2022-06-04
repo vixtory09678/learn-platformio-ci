@@ -3,7 +3,7 @@ name: PlatformIO CI
 on: [push]
 
 jobs:
-  dependencies:
+  build_and_check:
     name: setup dependencies
     runs-on: ubuntu-latest
 
