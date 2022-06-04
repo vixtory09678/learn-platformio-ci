@@ -24,6 +24,7 @@ jobs:
         if: steps.cache-pip.outputs.cache-hit != 'true'
         run: python -m pip install --upgrade pip
       - name: Install platformio
+      - run: pip list -v
         run: |
           pip install -U platformio
           platformio update
