@@ -9,12 +9,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-      - name: Install PlatformIO
-        run: |
-          python -m pip install --upgrade pip
-      - run: pip list -v
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -22,6 +16,14 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install pip
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U platformio
+          platformio update
+      - run: pip list -v
 
   build:
     needs: dependencies
