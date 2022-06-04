@@ -29,12 +29,22 @@ jobs:
           pip install -U platformio
           platformio update
       - run: pip list -v
+      - name: Cache platformio
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/lib/python3.8/site-packages
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
 
   build:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Cache platformio
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/lib/python3.8/site-packages
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         id: cache-pip
         uses: actions/cache@v3
@@ -55,6 +65,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Cache platformio
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/lib/python3.8/site-packages
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         id: cache-pip
         uses: actions/cache@v3
