@@ -43,7 +43,7 @@ jobs:
       - name: Cache platformio
         uses: actions/cache@v3
         with:
-          path: ~/.local/lib/python3.8/site-packages
+          path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         id: cache-pip
@@ -68,7 +68,7 @@ jobs:
       - name: Cache platformio
         uses: actions/cache@v3
         with:
-          path: ~/.local/lib/python3.8/site-packages
+          path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         id: cache-pip
