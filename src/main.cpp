@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-float Divide(int x, int y) {
+float divide(int x, int y) {
   if (y == 0.0) {
     return 0.0;
   }
@@ -12,7 +12,7 @@ float Divide(int x, int y) {
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println(Divide(10, 2));
+  Serial.println(divide(10, 2));
 }
 
 void loop() {

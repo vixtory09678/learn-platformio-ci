@@ -35,14 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-      - name: Cache PlatformIO
-        uses: actions/cache@v3
-        id: platformio-cache
-        with:
-          path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -50,29 +42,18 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
-      - name: list file
         run: ls /home/runner/work/_temp/ -la
       - run: |
           pip install --upgrade platformio
           platformio update
       - name: build project
         run: platformio run
-      - run: ls /home/runner/.platformio -la
-      - run: ls /home/runner/.platformio/penv -la
 
   lint:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-      - name: Cache PlatformIO
-        uses: actions/cache@v3
-        id: platformio-cache
-        with:
-          path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -80,7 +61,6 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
-      - name: list file
         run: ls /home/runner/work/_temp/ -la
       - run: |
           pip install --upgrade platformio
