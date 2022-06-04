@@ -45,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
           restore-keys: |
             ${{ runner.os }}-platformio-
+      - name: list file
+        run: ls /home/runner/work/_temp/ -la
       - name: build project
         run: pio run
 
@@ -63,5 +65,7 @@ jobs:
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
           restore-keys: |
             ${{ runner.os }}-platformio-
+      - name: list file
+        run: ls /home/runner/work/_temp/ -la
       - name: check format
         run: pio check --fail-on-defect high
