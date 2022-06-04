@@ -35,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         id: platformio-cache
@@ -45,13 +47,15 @@ jobs:
         run: ls /home/runner/work/_temp/ -la
       - run: ls .
       - name: build project
-        run: ./scripts/run_build.sh
+        run: platformio run
 
   lint:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         id: platformio-cache
@@ -62,4 +66,4 @@ jobs:
         run: ls /home/runner/work/_temp/ -la
       - run: ls .
       - name: check format
-        run: ./scripts/run_checks.sh
+        run: platformio check --fail-on-defect high
