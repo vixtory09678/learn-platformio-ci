@@ -21,7 +21,8 @@ jobs:
         id: platformio-cache
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-platformio-1234
+#           ${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         uses: actions/cache@v3.0.3
         with:
@@ -42,7 +43,7 @@ jobs:
         uses: actions/cache@v3.0.3
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-platformio-1234
       - name: list file
         run: ls /home/runner/work/_temp/ -la
       - name: build project
@@ -60,7 +61,7 @@ jobs:
         uses: actions/cache@v3.0.3
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-platformio-1234
       - name: list file
         run: ls /home/runner/work/_temp/ -la
       - name: check format
