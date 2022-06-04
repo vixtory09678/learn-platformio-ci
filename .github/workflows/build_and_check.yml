@@ -43,6 +43,7 @@ jobs:
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: list file
         run: ls /home/runner/work/_temp/ -la
+      - run: ls .
       - name: build project
         run: platformio run
 
@@ -59,5 +60,6 @@ jobs:
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: list file
         run: ls /home/runner/work/_temp/ -la
+      - run: ls .
       - name: check format
         run: platformio check --fail-on-defect high
