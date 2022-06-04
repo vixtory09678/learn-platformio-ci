@@ -13,9 +13,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-py-pip-
+            ${{ runner.os }}-pip-
       - name: Set up Python
         uses: actions/setup-python@v2
       - name: Install pip
@@ -34,9 +34,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-py-pip-
+            ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
           pip install -U platformio
@@ -53,9 +53,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-py-pip-
+            ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
           pip install -U platformio
