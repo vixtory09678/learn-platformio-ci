@@ -21,14 +21,16 @@ jobs:
         id: pio-cache
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-pio-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
+          restore-keys: |
+            ${{ runner.os }}-platformio-
       - name: Cache pip
         uses: actions/cache@v3.0.3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-py-pip-
 
   build:
     needs: dependencies
@@ -40,7 +42,7 @@ jobs:
         with:
           path: ~/.platformio
           restore-keys: |
-            ${{ runner.os }}-pio-
+            ${{ runner.os }}-platformio-
       - name: build project
         run: platformio run
 
@@ -54,6 +56,6 @@ jobs:
         with:
           path: ~/.platformio
           restore-keys: |
-            ${{ runner.os }}-pio-
+            ${{ runner.os }}-platformio-
       - name: check format
         run: platformio check --fail-on-defect high
