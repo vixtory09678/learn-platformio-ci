@@ -55,7 +55,6 @@ jobs:
             ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
-          pip install -U platformio
           platformio update
       - name: build project
         run: platformio run
@@ -80,7 +79,6 @@ jobs:
             ${{ runner.os }}-pip-
       - run: pip list -v
       - run: |
-          pip install -U platformio
           platformio update
       - name: check format
         run: platformio check --fail-on-defect high
