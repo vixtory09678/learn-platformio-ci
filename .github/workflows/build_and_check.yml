@@ -43,9 +43,14 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
+      - run: ls /home/runner/work/_temp -la
+      - name: pip before
+        run: pip list -v
       - run: |
           pip install --upgrade platformio
           platformio update
+      - name: pip after
+        run: pip list -v
       - name: build project
         run: platformio run
 
@@ -61,8 +66,13 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
+      - run: ls /home/runner/work/_temp -la
+      - name: pip before
+        run: pip list -v
       - run: |
           pip install --upgrade platformio
           platformio update
+      - name: pip after
+        run: pip list -v
       - name: check format
         run: platformio check --fail-on-defect high
