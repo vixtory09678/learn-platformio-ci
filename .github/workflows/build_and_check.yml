@@ -18,9 +18,9 @@ jobs:
           platformio update
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
-        id: pio-cache
+        id: platformio-cache
         with:
-          path: ~/.cache/platformio
+          path: ~/.platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         uses: actions/cache@v3.0.3
@@ -38,7 +38,8 @@ jobs:
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         with:
-          path: ~/.cache/platformio
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
           restore-keys: |
             ${{ runner.os }}-platformio-
       - name: build project
@@ -52,7 +53,8 @@ jobs:
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         with:
-          path: ~/.cache/platformio
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
           restore-keys: |
             ${{ runner.os }}-platformio-
       - name: check format
