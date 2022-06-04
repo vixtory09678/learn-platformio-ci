@@ -42,7 +42,6 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
-        run: ls /home/runner/work/_temp/ -la
       - run: |
           pip install --upgrade platformio
           platformio update
@@ -61,7 +60,6 @@ jobs:
           key: ${{ runner.os }}-py-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-py-pip-
-        run: ls /home/runner/work/_temp/ -la
       - run: |
           pip install --upgrade platformio
           platformio update
