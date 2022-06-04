@@ -28,8 +28,6 @@ jobs:
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-pio-${{ hashFiles('**/lockfiles') }}
-          restore-keys: |
-            ${{ runner.os }}-pio-
 
   build:
     needs: dependencies
