@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build_and_check:
-    name: setup dependencies
+    name: build and check format
     runs-on: ubuntu-latest
 
     steps:
