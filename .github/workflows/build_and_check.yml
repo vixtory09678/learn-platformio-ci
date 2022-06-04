@@ -52,10 +52,7 @@ jobs:
             ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: ls /home/runner -la
-      - run: ls /home/runner/.platformio/ -la
-      - run: ls /home/runner/.platformio/penv -la
-      - run: ls /home/runner/.platformio/penv/Scripts -la
+      - run: pip list -v
       - name: build project
         run: ~/.platformio/penv/Scripts/platformio run
 
@@ -81,9 +78,6 @@ jobs:
             ${{ runner.os }}-py-pip-
       - name: list file
         run: ls /home/runner/work/_temp/ -la
-      - run: ls /home/runner -la
-      - run: ls /home/runner/.platformio/ -la
-      - run: ls /home/runner/.platformio/penv -la
-      - run: ls /home/runner/.platformio/penv/Scripts -la
+      - run: pip list -v
       - name: check format
         run: ~/.platformio/penv/Scripts/platformio check --fail-on-defect high
