@@ -18,8 +18,8 @@ jobs:
             ${{ runner.os }}-pip-
       - name: Cache PlatformIO
         uses: actions/cache@v2
+        id: cache-platformio
         with:
-          id: cache-platform-io
           path: ~/.platformio
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
       - name: Set up Python
@@ -33,11 +33,11 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Cache PlatformIO
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
+        id: cache-platformio
         with:
-          restore-keys: ${{ runner.os }}-
           path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
       - name: build project
         run: pio run
 
@@ -45,10 +45,10 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Cache PlatformIO
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
+        id: cache-platformio
         with:
-          restore-keys: ${{ runner.os }}-
           path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
       - name: check format
         run: pio check --fail-on-defect high
