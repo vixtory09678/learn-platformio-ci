@@ -32,6 +32,10 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
+      - name: Check path
+        run: ls -a
+      - name: Check path dept
+        run: ls ~/.platformio -a
       - name: Cache PlatformIO
         uses: actions/cache@v2
         with:
@@ -45,6 +49,10 @@ jobs:
     needs: dependencies
     runs-on: ubuntu-latest
     steps:
+      - name: Check path
+        run: ls -a
+      - name: Check path dept
+        run: ls ~/.platformio -a
       - name: Cache PlatformIO
         uses: actions/cache@v2
         with:
