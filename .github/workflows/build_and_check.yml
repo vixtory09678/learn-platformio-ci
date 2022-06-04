@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v3.0.3
         id: pio-cache
         with:
-          path: ~/.platformio
+          path: ~/.cache/platformio
           key: ${{ runner.os }}-platformio-${{ hashFiles('**/lockfiles') }}
       - name: Cache pip
         uses: actions/cache@v3.0.3
@@ -38,9 +38,9 @@ jobs:
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         with:
-          path: ~/.platformio
+          path: ~/.cache/platformio
           restore-keys: |
-            ${{ runner.os }}-platformio-*
+            ${{ runner.os }}-platformio-
       - name: build project
         run: platformio run
 
@@ -52,8 +52,8 @@ jobs:
       - name: Cache PlatformIO
         uses: actions/cache@v3.0.3
         with:
-          path: ~/.platformio
+          path: ~/.cache/platformio
           restore-keys: |
-            ${{ runner.os }}-platformio-*
+            ${{ runner.os }}-platformio-
       - name: check format
         run: platformio check --fail-on-defect high
