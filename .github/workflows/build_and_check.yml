@@ -14,8 +14,6 @@ jobs:
       - name: Install PlatformIO
         run: |
           python -m pip install --upgrade pip
-          pip install --upgrade platformio
-          platformio update
       - run: pip list -v
       - name: Cache pip
         uses: actions/cache@v3
@@ -38,7 +36,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-py-pip-
       - run: |
-          pip install --upgrade platformio
+          pip install -U platformio
           platformio update
       - name: build project
         run: platformio run
@@ -56,7 +54,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-py-pip-
       - run: |
-          pip install --upgrade platformio
+          pip install -U platformio
           platformio update
       - name: check format
         run: platformio check --fail-on-defect high
