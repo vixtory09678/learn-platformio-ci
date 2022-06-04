@@ -54,7 +54,9 @@ jobs:
         run: ls /home/runner/work/_temp/ -la
       - run: pip list -v
       - name: build project
-        run: ~/.platformio/penv/Scripts/platformio run
+        run: platformio run
+      - run: ls /home/runner/.platformio -la
+      - run: ls /home/runner/.platformio/penv -la
 
   lint:
     needs: dependencies
@@ -80,4 +82,4 @@ jobs:
         run: ls /home/runner/work/_temp/ -la
       - run: pip list -v
       - name: check format
-        run: ~/.platformio/penv/Scripts/platformio check --fail-on-defect high
+        run: platformio check --fail-on-defect high
