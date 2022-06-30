@@ -43,8 +43,6 @@ blob.upload_from_filename(fileName)
 
 blob.make_public()
 
-print("your file url", blob.public_url)
-
 db.reference("/firmware/{key}".format(key=uuid)).set(
     {
         "id": "" + str(uuid),
