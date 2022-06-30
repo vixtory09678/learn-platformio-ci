@@ -1,7 +1,6 @@
 #include <AESSimple.h>
 #include <Arduino.h>
 #include <unity.h>
-using namespace std;
 
 AESSimple aes;
 const char key[16] = "i am team";
@@ -12,7 +11,7 @@ size_t size = 0;
 uint8_t dataToBeEncrypted[50] = {0};
 uint8_t bufferToBeDecrypted[50] = {0};
 
-void test_encryption() {
+void testEncryption() {
 
   bufferSize = aes.calAESBlockSize(plainText.length());
   size = aes.encrypt((uint8_t *)plainText.c_str(), bufferSize, (uint8_t *)key,
@@ -25,7 +24,7 @@ void test_encryption() {
   TEST_PASS();
 }
 
-void test_decryption() {
+void testDecryption() {
 
   size = aes.decrypt(dataToBeEncrypted, bufferSize, (uint8_t *)key,
                      bufferToBeDecrypted);
@@ -39,8 +38,8 @@ void test_decryption() {
 
 void setup() {
   UNITY_BEGIN();
-  RUN_TEST(test_encryption);
-  RUN_TEST(test_decryption);
+  RUN_TEST(testEncryption);
+  RUN_TEST(testDecryption);
   UNITY_END();
 }
 
