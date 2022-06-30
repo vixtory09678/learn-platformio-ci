@@ -39,9 +39,11 @@ jobs:
       - name: Run PlatformIO
         run: pio run
       - name: deploy firmware binary to firebase could storage
-        run: |
-          echo $TEST
-          FIREBASE_CREDENTIAL=${{ secrets.FIREBASE_CREDENTIAL }} python scripts/deploy.py ${{ steps.get_version.outputs.version }}
+        shell: bash
         env:
           FIREBASE_CREDENTIAL: ${{ secrets.FIREBASE_CREDENTIAL }}
           TEST: ${{ secrets.TEST }}
+        run: |
+          echo "$TEST"
+          echo "$FIREBASE_CREDENTIAL"
+          python scripts/deploy.py ${{ steps.get_version.outputs.version }}
