@@ -19,15 +19,15 @@ int AESSimple::encrypt(uint8_t *input, uint8_t size, uint8_t key[16],
   // initial context
   mbedtls_aes_init(&encryptContext);
   ret = mbedtls_aes_setkey_enc(&encryptContext, key, 256);
-  if (ret)
+  if (ret) {
     return PROCESS_FAIL;
-
+  }
   // encryption
   ret = mbedtls_aes_crypt_cbc(&encryptContext, ESP_AES_ENCRYPT, size, iv,
                               msgBuff, encrypt);
-  if (ret)
+  if (ret) {
     return PROCESS_FAIL;
-
+  }
   return size;
 }
 
@@ -37,8 +37,9 @@ int AESSimple::decrypt(uint8_t *input, size_t size, uint8_t key[16],
   uint8_t iv[16] = {0};
   int ret = 0;
 
-  if (size % 16)
+  if (size % 16) {
     return PROCESS_FAIL;
+  }
 
   uint8_t msgBuff[size];
   memset(msgBuff, 0, size);
@@ -47,14 +48,16 @@ int AESSimple::decrypt(uint8_t *input, size_t size, uint8_t key[16],
   // initial context
   mbedtls_aes_init(&decryptContext);
   ret = mbedtls_aes_setkey_dec(&decryptContext, key, 256);
-  if (ret)
+  if (ret) {
     return PROCESS_FAIL;
+  }
 
   // decryption
   ret = mbedtls_aes_crypt_cbc(&decryptContext, ESP_AES_DECRYPT, size, iv,
                               msgBuff, decrypt);
-  if (ret)
+  if (ret) {
     return PROCESS_FAIL;
+  }
 
   return size;
 }
