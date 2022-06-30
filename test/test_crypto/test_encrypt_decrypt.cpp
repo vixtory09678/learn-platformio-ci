@@ -11,7 +11,7 @@ size_t size = 0;
 uint8_t dataToBeEncrypted[50] = {0};
 uint8_t bufferToBeDecrypted[50] = {0};
 
-void testEncryption() {
+void test_encryption() {
 
   bufferSize = aes.calAESBlockSize(plainText.length());
   size = aes.encrypt((uint8_t *)plainText.c_str(), bufferSize, (uint8_t *)key,
@@ -24,7 +24,7 @@ void testEncryption() {
   TEST_PASS();
 }
 
-void testDecryption() {
+void test_decryption() {
 
   size = aes.decrypt(dataToBeEncrypted, bufferSize, (uint8_t *)key,
                      bufferToBeDecrypted);
