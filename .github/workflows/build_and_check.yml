@@ -1,6 +1,18 @@
 name: PlatformIO CI
 
-on: [push]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+    path-ignore:
+      - ./*.md
+  pull_request:
+    path-ignore:
+      - ./*.md
 
 jobs:
   dependencies:
