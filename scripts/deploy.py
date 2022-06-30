@@ -24,17 +24,18 @@ if firebaseEnv is not None:
     f.write(firebaseEnv)
     f.close()
 else:
-    exit("ENV Not set")
+    exit("FIREBASE_CREDENTIAL does't exits, please check your environment")
 
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(
     cred,
     {
-        "storageBucket": "iamteam-playground.appspot.com",
-        "databaseURL": "https://iamteam-playground-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        "storageBucket": "iamteam-playground.appspot.com",  # set your storage bucket with out gs:// prefix
+        "databaseURL": "https://iamteam-playground-default-rtdb.asia-southeast1.firebasedatabase.app/",  # set your databaseURL
     },
 )
 
+# get firmware binary file
 fileName = ".pio/build/esp32dev/firmware.bin"
 
 uuid = uuid4()
