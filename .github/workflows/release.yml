@@ -43,4 +43,4 @@ jobs:
         run: pio run
       - name: deploy firmware binary to firebase could storage
         run: |
-          FIREBASE_CREDENTIAL=${{env.FIREBASE_CREDENTIAL}} python scripts/deploy.py ${{ steps.get_version.outputs.version }}
+          FIREBASE_CREDENTIAL=${{ secrets.FIREBASE_CREDENTIAL }} python scripts/deploy.py ${{ steps.get_version.outputs.version }}
