@@ -17,6 +17,8 @@ if firmware_version.startswith("v") == False:
 
 firebaseEnv = os.getenv("FIREBASE_CREDENTIAL")
 
+print(len(firebaseEnv))
+
 if firebaseEnv is not None:
     f = open("serviceAccountKey.json", "w")
     f.write(firebaseEnv)
