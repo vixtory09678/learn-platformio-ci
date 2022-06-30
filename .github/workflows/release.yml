@@ -43,7 +43,7 @@ jobs:
         env:
           FIREBASE_CREDENTIAL: ${{ secrets.FIREBASE_CREDENTIAL }}
           TEST: ${{ secrets.TEST }}
+          AAA: asdf
         run: |
-          echo "$TEST"
-          echo "$FIREBASE_CREDENTIAL"
+          echo ${{ env.AAA}}
           python scripts/deploy.py ${{ steps.get_version.outputs.version }}
