@@ -45,7 +45,7 @@ jobs:
           python -m pip install -r requirements.txt
           pio run
   static_analysis:
-    needs: build
+    needs: setup_dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
