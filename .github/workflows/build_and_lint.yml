@@ -17,48 +17,46 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Create virtual environment
-        run: |
-          python -m venv $HOME/.virtualenvs/platformio
-          source $HOME/.virtualenvs/platformio/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install platformio
-      - name: Activate virtual environment
-        run: source $HOME/.virtualenvs/platformio/bin/activate
-      - name: Cache virtual environment
+      - name: Install and cache pip packages
         uses: actions/cache@v2
         with:
-          path: $HOME/.virtualenvs/platformio
-          key: ${{ runner.os }}-pio
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-pio
+            ${{ runner.os }}-pip-
+        run: |
+          python -m pip install -r requirements.txt
+
   build:
     needs: setup_dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Restore virtual environment cache
+      - uses: actions/checkout@v2
+      - name: Install dependencies from cache
         uses: actions/cache@v2
         with:
-          path: $HOME/.virtualenvs/platformio
-          key: ${{ runner.os }}-pio
-      - name: Activate virtual environment
-        run: source $HOME/.virtualenvs/platformio/bin/activate
-      - name: Run build
-        run: pio run
-  static_analysis:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore virtual environment cache
-        uses: actions/cache@v2
-        with:
-          path: $HOME/.virtualenvs/platformio
-          key: ${{ runner.os }}-pio
-      - name: Activate virtual environment
-        run: source $HOME/.virtualenvs/platformio/bin/activate
-      - name: Run static analysis
-        run: pio check --fail-on-defect high
-  test:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Build project
+        run: |
+          python -m pip install -r requirements.txt
+          pio run
+  # static_analysis:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Restore virtual environment cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: $HOME/.virtualenvs/platformio
+  #         key: ${{ runner.os }}-pio
+  #     - name: Activate virtual environment
+  #       run: source $HOME/.virtualenvs/platformio/bin/activate
+  #     - name: Run static analysis
+  #       run: pio check --fail-on-defect high
+  # test:
     needs: build
     runs-on: ubuntu-latest
     steps:
