@@ -5,9 +5,7 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - "*"
-    except:
+    igbranches-ignore:
       - main
 
 jobs:
@@ -21,14 +19,16 @@ jobs:
           python-version: 3.8
       - name: Create virtual environment
         run: |
-          python -m venv $HOME/.platformio/venv
-          source $HOME/.platformio/venv/bin/activate
+          python -m venv $HOME/.virtualenvs/platformio
+          source $HOME/.virtualenvs/platformio/bin/activate
           python -m pip install --upgrade pip
           python -m pip install platformio
+      - name: Activate virtual environment
+        run: source $HOME/.virtualenvs/platformio/bin/activate
       - name: Cache virtual environment
         uses: actions/cache@v2
         with:
-          path: $HOME/.platformio/venv
+          path: $HOME/.virtualenvs/platformio
           key: ${{ runner.os }}-pio
           restore-keys: |
             ${{ runner.os }}-pio
@@ -39,10 +39,10 @@ jobs:
       - name: Restore virtual environment cache
         uses: actions/cache@v2
         with:
-          path: $HOME/.platformio/venv
+          path: $HOME/.virtualenvs/platformio
           key: ${{ runner.os }}-pio
       - name: Activate virtual environment
-        run: source $HOME/.platformio/venv/bin/activate
+        run: source $HOME/.virtualenvs/platformio/bin/activate
       - name: Run build
         run: pio run
   static_analysis:
@@ -52,10 +52,10 @@ jobs:
       - name: Restore virtual environment cache
         uses: actions/cache@v2
         with:
-          path: $HOME/.platformio/venv
+          path: $HOME/.virtualenvs/platformio
           key: ${{ runner.os }}-pio
       - name: Activate virtual environment
-        run: source $HOME/.platformio/venv/bin/activate
+        run: source $HOME/.virtualenvs/platformio/bin/activate
       - name: Run static analysis
         run: pio check --fail-on-defect high
   test:
@@ -65,9 +65,9 @@ jobs:
       - name: Restore virtual environment cache
         uses: actions/cache@v2
         with:
-          path: $HOME/.platformio/venv
+          path: $HOME/.virtualenvs/platformio
           key: ${{ runner.os }}-pio
       - name: Activate virtual environment
-        run: source $HOME/.platformio/venv/bin/activate
-      - name: Run unit tests
+        run: source $HOME/.virtualenvs/platformio/bin/activate
+      - name: Run tests
         run: pio test
