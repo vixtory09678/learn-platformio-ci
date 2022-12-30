@@ -30,17 +30,32 @@ jobs:
     needs: setup_dependencies
     runs-on: ubuntu-latest
     steps:
+      - name: Restore platformio cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-pio
       - name: Run build
         run: pio run
   static_analysis:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Restore platformio cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-pio
       - name: Run static analysis
         run: pio check --fail-on-defect high
   # test:
   #   needs: build
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Run unit tests
-  #       run: pio test
+  #   - name: Restore platformio cache
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: ~/.platformio
+  #       key: ${{ runner.os }}-pio
+  #   - name: Run unit tests
+  #     run: pio test
