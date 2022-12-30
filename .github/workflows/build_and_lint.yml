@@ -58,15 +58,15 @@ jobs:
   #     - name: Run static analysis
   #       run: pio check --fail-on-defect high
   # test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore virtual environment cache
-        uses: actions/cache@v2
-        with:
-          path: $HOME/.virtualenvs/platformio
-          key: ${{ runner.os }}-pio
-      - name: Activate virtual environment
-        run: source $HOME/.virtualenvs/platformio/bin/activate
-      - name: Run tests
-        run: pio test
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Restore virtual environment cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: $HOME/.virtualenvs/platformio
+  #         key: ${{ runner.os }}-pio
+  #     - name: Activate virtual environment
+  #       run: source $HOME/.virtualenvs/platformio/bin/activate
+  #     - name: Run tests
+  #       run: pio test
