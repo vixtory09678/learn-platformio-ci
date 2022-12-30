@@ -5,6 +5,10 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - "*"
+    except:
+      - main
 
 jobs:
   setup_dependencies:
@@ -15,14 +19,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Install dependencies
+      - name: Create virtual environment
         run: |
+          python -m venv $HOME/.platformio/venv
+          source $HOME/.platformio/venv/bin/activate
           python -m pip install --upgrade pip
-          pip install platformio
-      - name: Cache platformio
+          python -m pip install platformio
+      - name: Cache virtual environment
         uses: actions/cache@v2
         with:
-          path: ~/.platformio
+          path: $HOME/.platformio/venv
           key: ${{ runner.os }}-pio
           restore-keys: |
             ${{ runner.os }}-pio
@@ -30,32 +36,38 @@ jobs:
     needs: setup_dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Restore platformio cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v2
         with:
-          path: ~/.platformio
+          path: $HOME/.platformio/venv
           key: ${{ runner.os }}-pio
+      - name: Activate virtual environment
+        run: source $HOME/.platformio/venv/bin/activate
       - name: Run build
         run: pio run
   static_analysis:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Restore platformio cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v2
         with:
-          path: ~/.platformio
+          path: $HOME/.platformio/venv
           key: ${{ runner.os }}-pio
+      - name: Activate virtual environment
+        run: source $HOME/.platformio/venv/bin/activate
       - name: Run static analysis
         run: pio check --fail-on-defect high
-  # test:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Restore platformio cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ~/.platformio
-  #       key: ${{ runner.os }}-pio
-  #   - name: Run unit tests
-  #     run: pio test
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore virtual environment cache
+        uses: actions/cache@v2
+        with:
+          path: $HOME/.platformio/venv
+          key: ${{ runner.os }}-pio
+      - name: Activate virtual environment
+        run: source $HOME/.platformio/venv/bin/activate
+      - name: Run unit tests
+        run: pio test
